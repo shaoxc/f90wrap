@@ -24,11 +24,10 @@ jobs:
     strategy:
       matrix:
         buildplat:
-        - [macos-m1, macosx, arm64]
+        - [macos-13, macosx, arm64]
 
-        #python: ["cp38", "cp39", "cp310", "cp311", "cp312"]
+        #python: ["cp38", "cp39", "cp310", "cp311"]
         python: ["cp38", "cp39"]
-        #python: ["cp39"]
       fail-fast: false
 
     env:
@@ -53,10 +52,6 @@ jobs:
           CIBW_TEST_COMMAND_MACOS: "cd {project}/examples; make clean; make test"
           CIBW_TEST_COMMAND_LINUX: "cd {project}/examples; make clean; make test"
           CIBW_TEST_COMMAND_WINDOWS: "python -m f90wrap --version"
-          CIBW_BEFORE_BUILD: |
-            #
-            python -m pip cache purge
-            #
 
       - uses: actions/upload-artifact@v2
         with:
